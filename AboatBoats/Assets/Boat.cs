@@ -10,6 +10,7 @@ public class Boat : MonoBehaviour
 	public GameObject motor;
 	public GameObject pin;
 	public GameObject spinny;
+	private Vector3 speed;
 	private Vector3 velocity;
 
     void Start()
