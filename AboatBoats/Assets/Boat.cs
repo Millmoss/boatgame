@@ -20,6 +20,7 @@ public class Boat : MonoBehaviour
 	private float xRotationMod;
 	private float zRotationStart;
 	private float zRotationMod;
+	private Vector3 positionChange;
 
     void Start()
     {
@@ -31,20 +32,26 @@ public class Boat : MonoBehaviour
 		xRotationMod = 0;
 		zRotationStart = transform.rotation.eulerAngles.z;
 		zRotationMod = 0;
+		positionChange = transform.position;
     }
 	
     void Update()
     {
+		positionChange = transform.position - positionChange;
+
 		velocity = Vector3.zero;
 		control();
 		water();
 		gravity();
 
 		velocity += speed;
-		if (velocity.magnitude > 20)
-			velocity += waterPlusGravity;
-		else
-			velocity += waterPlusGravity * (velocity.magnitude / 20) * (velocity.magnitude / 20);
+
+		if (Mathf.Abs(positionChange.y - waterPlusGravity.y) > 5f && Mathf.Abs(waterPlusGravity.y) > 3)
+			waterPlusGravity = Vector3.zero;
+		
+		velocity += waterPlusGravity;
+
+		positionChange = transform.position;
 	}
 
 	void FixedUpdate()
@@ -55,7 +62,7 @@ public class Boat : MonoBehaviour
 		transform.position += velocity * Time.deltaTime;
 
 		float yPos = Mathf.Lerp(transform.position.y, sea.transform.position.y, Mathf.Abs(24 - velocity.magnitude) / 10 * Time.deltaTime);
-		print(velocity.magnitude);
+		//print(velocity.magnitude);
 		
 		transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
 
