@@ -1,9 +1,12 @@
 INCOMPLETE
-Rock Ramp x 3
 Rock Wall x 5 (varied width/height, one with a hole in it)
-Rock Pillar x 3
 Lighthouse
-Fish
 
 COMPLETED
 Big Boat
+Rock Pillar x 3
+Rock Floor
+Rock Ramp x 3
+Buoy
+Buoy with Flag
+Fish
