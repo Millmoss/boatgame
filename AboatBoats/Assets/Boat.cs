@@ -41,7 +41,10 @@ public class Boat : MonoBehaviour
 		gravity();
 
 		velocity += speed;
-		velocity += waterPlusGravity;
+		if (velocity.magnitude > 20)
+			velocity += waterPlusGravity;
+		else
+			velocity += waterPlusGravity * (velocity.magnitude / 20) * (velocity.magnitude / 20);
 	}
 
 	void FixedUpdate()
@@ -50,6 +53,11 @@ public class Boat : MonoBehaviour
 
 		speed = Vector3.ClampMagnitude(speed, speedLimit);
 		transform.position += velocity * Time.deltaTime;
+
+		float yPos = Mathf.Lerp(transform.position.y, sea.transform.position.y, Mathf.Abs(24 - velocity.magnitude) / 10 * Time.deltaTime);
+		print(velocity.magnitude);
+		
+		transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
 
 		transform.Rotate(new Vector3(0, -speed.magnitude * 0.05f * Vector3.SignedAngle(transform.forward, motor.transform.up, transform.up) * Time.deltaTime));
 	}
@@ -88,7 +96,7 @@ public class Boat : MonoBehaviour
 		speed += bFor * Time.deltaTime / (1.4f + oldVelocity.magnitude - bFor.magnitude);
 
 		xRotationMod = -bFor.magnitude / 1.55f;
-		zRotationMod = Vector3.SignedAngle(transform.forward, oldVelocity, transform.up) / 3f;
+		zRotationMod = (Vector3.SignedAngle(transform.forward, oldVelocity, transform.up) / 7f) * Mathf.Clamp01(oldVelocity.magnitude / 5);
 
 		if (transform.position.y < sea.transform.position.y)
 		{
@@ -98,7 +106,7 @@ public class Boat : MonoBehaviour
 
 	private void gravity()
 	{
-		waterPlusGravity -= Vector3.up * 5f * Time.deltaTime;
+		waterPlusGravity -= Vector3.up * 9.8f * Time.deltaTime;
 	}
 
 	private void phys()
