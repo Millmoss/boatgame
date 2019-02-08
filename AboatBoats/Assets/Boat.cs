@@ -21,6 +21,7 @@ public class Boat : MonoBehaviour
 	private float zRotationStart;
 	private float zRotationMod;
 	private Vector3 positionChange;
+	private bool onRamp;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class Boat : MonoBehaviour
 		zRotationStart = transform.rotation.eulerAngles.z;
 		zRotationMod = 0;
 		positionChange = transform.position;
+		onRamp = false;
     }
 	
     void Update()
@@ -41,13 +43,11 @@ public class Boat : MonoBehaviour
 
 		velocity = Vector3.zero;
 		control();
-		water();
+		if (transform.position.y <= sea.transform.position.y)
+			water();
 		gravity();
 
 		velocity += speed;
-
-		if (Mathf.Abs(positionChange.y - waterPlusGravity.y) > 5f && Mathf.Abs(waterPlusGravity.y) > 3)
-			waterPlusGravity = Vector3.zero;
 		
 		velocity += waterPlusGravity;
 
@@ -73,11 +73,13 @@ public class Boat : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.I))
 		{
-			speed += motor.transform.up * hossPower * Time.deltaTime;
+			if (transform.position.y <= sea.transform.position.y)
+				speed += motor.transform.up * hossPower * Time.deltaTime;
 		}
 		else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.K))
 		{
-			speed -= motor.transform.up * hossPower * Time.deltaTime / 10;
+			if (transform.position.y <= sea.transform.position.y)
+				speed -= motor.transform.up * hossPower * Time.deltaTime / 10;
 		}
 		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.J))
 		{
@@ -105,21 +107,42 @@ public class Boat : MonoBehaviour
 		xRotationMod = -bFor.magnitude / 1.55f;
 		zRotationMod = (Vector3.SignedAngle(transform.forward, oldVelocity, transform.up) / 7f) * Mathf.Clamp01(oldVelocity.magnitude / 5);
 
-		if (transform.position.y < sea.transform.position.y)
-		{
-			waterPlusGravity += Vector3.up * buoyancy * Time.deltaTime;
-		}
+		waterPlusGravity += Vector3.up * buoyancy * Time.deltaTime * (sea.transform.position.y - transform.position.y) * 3f;
 	}
 
 	private void gravity()
 	{
 		waterPlusGravity -= Vector3.up * 9.8f * Time.deltaTime;
+		if (waterPlusGravity.y < -1f && onRamp)
+		{
+			waterPlusGravity = new Vector3(waterPlusGravity.x, -1, waterPlusGravity.z);
+			//print("AHAFDSG");
+		}
 	}
 
 	private void phys()
 	{
 		boatBody.velocity = Vector3.zero;
-		boatBody.angularVelocity = Vector3.Lerp(boatBody.angularVelocity, Vector3.zero, 0.5f);
-		transform.rotation = Quaternion.Slerp(boatBody.rotation, Quaternion.Euler(xRotationStart + xRotationMod, boatBody.rotation.eulerAngles.y, zRotationStart + zRotationMod), 0.1f);
+		if (transform.position.y <= sea.transform.position.y)
+		{
+			boatBody.angularVelocity = Vector3.Lerp(boatBody.angularVelocity, Vector3.zero, 0.5f);
+			transform.rotation = Quaternion.Slerp(boatBody.rotation, Quaternion.Euler(xRotationStart + xRotationMod, boatBody.rotation.eulerAngles.y, zRotationStart + zRotationMod), 0.1f);
+		}
+	}
+
+	void OnCollisionEnter(Collision c)
+	{
+		if (c.gameObject.tag == "Ramp")
+		{
+			onRamp = true;
+		}
+	}
+
+	void OnCollisionExit(Collision c)
+	{
+		if (c.gameObject.tag == "Ramp")
+		{
+			onRamp = false;
+		}
 	}
 }
