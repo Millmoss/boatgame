@@ -1125,7 +1125,7 @@ Transform:
   m_GameObject: {fileID: 730391498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.72, y: 0, z: 1.66}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -2270,6 +2270,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 330486570, guid: 244048157136d1640baa01c222c15374, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 80659b9adfd7b764eb68dd67c14e6c69,
+        type: 2}
+    - target: {fileID: 892539652, guid: 244048157136d1640baa01c222c15374, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 80659b9adfd7b764eb68dd67c14e6c69,
+        type: 2}
+    - target: {fileID: 1673581215, guid: 244048157136d1640baa01c222c15374, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 80659b9adfd7b764eb68dd67c14e6c69,
+        type: 2}
+    - target: {fileID: 1709565014, guid: 244048157136d1640baa01c222c15374, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 80659b9adfd7b764eb68dd67c14e6c69,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 244048157136d1640baa01c222c15374, type: 3}
 --- !u!1 &1469674145
@@ -2963,8 +2983,8 @@ MonoBehaviour:
   hossPower: 5
   turnPower: 40
   speedLimit: 25
-  buoyancy: 13
-  seaHeightMod: 0.6
+  buoyancy: 20
+  seaHeightMod: 0.1
   motor: {fileID: 9069256734537499623}
   pin: {fileID: 3075518300308094565}
   spinny: {fileID: 6746085827352461444}
@@ -2982,6 +3002,11 @@ PrefabInstance:
       value: RockPillarZ
       objectReference: {fileID: 0}
     - target: {fileID: 6053516410325411332, guid: ae4b1d49f96398c418844f066f80c349,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986297668729082244, guid: ae4b1d49f96398c418844f066f80c349,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
@@ -3055,11 +3080,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2986297668729082244, guid: ae4b1d49f96398c418844f066f80c349,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae4b1d49f96398c418844f066f80c349, type: 3}
@@ -3190,7 +3210,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -3222,7 +3242,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2279935701879939027}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 80659b9adfd7b764eb68dd67c14e6c69, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3

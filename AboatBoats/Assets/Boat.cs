@@ -58,7 +58,6 @@ public class Boat : MonoBehaviour
 	{
 		phys();
 
-		speed = Vector3.ClampMagnitude(speed, speedLimit);
 		//transform.position += velocity * Time.deltaTime;
 
 		//transform.Rotate(new Vector3(0, -speed.magnitude * 0.05f * Vector3.SignedAngle(transform.forward, motor.transform.up, transform.up) * Time.deltaTime));
@@ -69,13 +68,28 @@ public class Boat : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.I))
 		{
-			if (transform.position.y <= seaHeight)
+			if (transform.position.y <= seaHeight + 0.4f)
 				boatBody.velocity += motor.transform.up * hossPower * Time.deltaTime;
+			else
+				boatBody.velocity += motor.transform.up * hossPower * Time.deltaTime * Mathf.Clamp01(Mathf.Abs(transform.position.y - seaHeight) / 10);
 		}
 		else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.K))
 		{
-			if (transform.position.y <= seaHeight)
+			if (transform.position.y <= seaHeight + 0.4f)
 				boatBody.velocity -= motor.transform.up * hossPower * Time.deltaTime / 10;
+			if (transform.position.y <= seaHeight)
+			{
+				Vector3 slowVec = Vector3.Lerp(new Vector3(boatBody.velocity.x, 0, boatBody.velocity.z), Vector3.zero, Time.deltaTime / 4);
+				boatBody.velocity = new Vector3(slowVec.x, boatBody.velocity.y, slowVec.z);
+			}
+		}
+		else
+		{
+			if (transform.position.y <= seaHeight)
+			{
+				Vector3 slowVec = Vector3.Lerp(new Vector3(boatBody.velocity.x, 0, boatBody.velocity.z), Vector3.zero, Time.deltaTime);
+				boatBody.velocity = new Vector3(slowVec.x, boatBody.velocity.y, slowVec.z);
+			}
 		}
 		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.J))
 		{
@@ -105,25 +119,25 @@ public class Boat : MonoBehaviour
 
 		waterPlusGravity += Vector3.up * buoyancy * Time.deltaTime * (seaHeight - transform.position.y) * 3f;*/
 
-		Vector3 bFor = Vector3.Project(boatBody.velocity, transform.forward);
-		Vector3 oldVelocity = boatBody.velocity;
-		boatBody.velocity -= boatBody.velocity * Time.deltaTime / 1.2f;
-		boatBody.velocity += bFor * Time.deltaTime / (0.7f + oldVelocity.magnitude - bFor.magnitude);
+		if (!(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.K)))
+		{
+			Vector3 bFor = Vector3.Project(boatBody.velocity, transform.forward);
+			Vector3 oldVelocity = boatBody.velocity;
+			boatBody.velocity -= boatBody.velocity * Time.deltaTime / 1.2f;
+			boatBody.velocity += bFor * Time.deltaTime / (1f + oldVelocity.magnitude - bFor.magnitude);
 
-		xRotationMod = -bFor.magnitude / 1.55f;
-		zRotationMod = (Vector3.SignedAngle(transform.forward, oldVelocity, transform.up) / 7f) * Mathf.Clamp01(oldVelocity.magnitude / 5);
-
+			xRotationMod = -bFor.magnitude / 1.55f;
+			zRotationMod = (Vector3.SignedAngle(transform.forward, oldVelocity, transform.up) / 7f) * Mathf.Clamp01(oldVelocity.magnitude / 5);
+		}
 		boatBody.velocity += Vector3.up * buoyancy * Time.deltaTime * (seaHeight - transform.position.y) * 3f;
-
-		//TOTO : Add velocity slowdown to physics.
 	}
 
 	private void gravity()
 	{
-		if (boatBody.velocity.y > 0)
-			boatBody.velocity -= Vector3.up * Mathf.Lerp(25f, 9.8f, (5 - boatBody.velocity.y) / 5) * Time.deltaTime;
-		else
-			boatBody.velocity -= Vector3.up * 9.8f * Time.deltaTime;
+		//if (boatBody.velocity.y > 0)
+		//	boatBody.velocity -= Vector3.up * Mathf.Lerp(25f, 9.8f, (5 - boatBody.velocity.y) / 5) * Time.deltaTime;
+		//else
+		boatBody.velocity -= Vector3.up * Mathf.Clamp(Mathf.Abs(9.8f + transform.position.y - seaHeight), 0, 25) * Mathf.Clamp(Mathf.Abs(transform.position.y - seaHeight), 0, 25) * Time.deltaTime;
 	}
 
 	private void phys()
@@ -135,7 +149,7 @@ public class Boat : MonoBehaviour
 		}
 
 		Vector3 clampVec = Vector3.ClampMagnitude(new Vector3(boatBody.velocity.x, 0, boatBody.velocity.z), speedLimit);
-		boatBody.velocity = new Vector3(clampVec.x, boatBody.velocity.y, clampVec.z);
+		//boatBody.velocity = new Vector3(clampVec.x, boatBody.velocity.y, clampVec.z);
 	}
 
 	void OnCollisionEnter(Collision c)
