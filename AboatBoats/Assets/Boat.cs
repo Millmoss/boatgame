@@ -120,6 +120,8 @@ public class Boat : MonoBehaviour
 		xRotationMod = -bFor.magnitude / 1f;
 		zRotationMod = (Vector3.SignedAngle(transform.forward, oldVelocity, transform.up) / 7f) * Mathf.Clamp01(oldVelocity.magnitude / 5);
 		boatBody.velocity += Vector3.up * buoyancy * Time.deltaTime * (seaHeight - transform.position.y);
+
+		//TOTO : For polish, make seaHeight correlate to wave height
 	}
 
 	private void gravity()
