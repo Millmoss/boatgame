@@ -140,10 +140,10 @@ public class Boat : MonoBehaviour
 		//	boatBody.velocity -= Vector3.up * Mathf.Lerp(25f, 9.8f, (5 - boatBody.velocity.y) / 5) * Time.deltaTime;
 		//else
 		//boatBody.velocity -= Vector3.up * Mathf.Clamp(Mathf.Abs(9.8f + transform.position.y - seaHeight), 0, 25) * Mathf.Clamp(Mathf.Abs(transform.position.y - seaHeight), 0, 25) * Time.deltaTime;
-		if (transform.position.y < seaHeight + 3f)
-			boatBody.velocity -= Vector3.up * 9.8f * Time.deltaTime;
-		else
-			boatBody.velocity -= Vector3.up * (9.8f + (transform.position.y - seaHeight + 3f) * 3f) * Time.deltaTime;
+		//if (transform.position.y < seaHeight + 3f)
+			//boatBody.velocity -= Vector3.up * 9.8f * Time.deltaTime;
+		//else
+			//boatBody.velocity -= Vector3.up * (9.8f + (transform.position.y - seaHeight + 3f) * 3f) * Time.deltaTime;
 	}
 
 	private void phys()
