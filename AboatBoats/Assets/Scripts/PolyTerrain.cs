@@ -30,7 +30,7 @@ public class PolyTerrain : MonoBehaviour
 		{
 			for (int x = 0; x < polyscale; x++)
 			{
-				areaMap[z, x] = new Vector3(x * sizescale, Mathf.PerlinNoise(x * perlinscale + perlinoffset, z * perlinscale + perlinoffset) * heightscale, z * sizescale);
+				areaMap[z, x] = new Vector3(x * sizescale, 0, z * sizescale);
 			}
 		}
 		polyTerrainMesh = new GameObject("Plane");
@@ -40,13 +40,8 @@ public class PolyTerrain : MonoBehaviour
 		polyTerrainMesh.AddComponent<MeshRenderer>();
 		polyTerrainMesh.GetComponent<MeshRenderer>().material = terrainmat;
 		polyTerrain();
-		AssetDatabase.CreateAsset(polyTerrainMesh.GetComponent<MeshFilter>().mesh, "Assets/HillMesh");
+		AssetDatabase.CreateAsset(polyTerrainMesh.GetComponent<MeshFilter>().mesh, "Assets/PlaneMesh");
 		AssetDatabase.SaveAssets();
-		Random.InitState(deformseed);
-		//polyLineMesh = new GameObject("Plane");
-		//polyLineMesh.AddComponent<MeshFilter>();
-		//polyLineMesh.AddComponent<MeshRenderer>();
-		//polyLineMesh.GetComponent<MeshRenderer>().material = linemat;
 	}
 
 	void Update()
@@ -64,14 +59,6 @@ public class PolyTerrain : MonoBehaviour
 			for (int x = 0; x < polyscale; x++)
 			{
 				terrainVertices[z * polyscale + x] = areaMap[x, z];
-				if (deform)
-				{
-					float xDeform = (Random.value - .5f) * deformamount;
-					float zDeform = (Random.value - .5f) * deformamount;
-					terrainVertices[z * polyscale + x] = new Vector3(terrainVertices[z * polyscale + x].x + xDeform * sizescale,
-																	terrainVertices[z * polyscale + x].y,
-																	terrainVertices[z * polyscale + x].z + zDeform * sizescale);
-				}
 			}
 		}
 
@@ -81,14 +68,6 @@ public class PolyTerrain : MonoBehaviour
 			{
 				float y = (areaMap[x, z].y + areaMap[x + 1, z].y + areaMap[x, z + 1].y + areaMap[x + 1, z + 1].y) / 4;
 				terrainVertices[polyscale * polyscale + ((polyscale - 1) * z) + x] = new Vector3(areaMap[x, z].x + .5f * sizescale, y, areaMap[x, z].z + .5f * sizescale);
-				if (deform)
-				{
-					float xDeform = (Random.value - .5f) * deformamount;
-					float zDeform = (Random.value - .5f) * deformamount;
-					terrainVertices[polyscale * polyscale + ((polyscale - 1) * z) + x] = new Vector3(terrainVertices[polyscale * polyscale + ((polyscale - 1) * z) + x].x + xDeform * sizescale,
-																									y,
-																									terrainVertices[polyscale * polyscale + ((polyscale - 1) * z) + x].z + zDeform * sizescale);
-				}
 			}
 		}
 
@@ -138,23 +117,5 @@ public class PolyTerrain : MonoBehaviour
 		}
 
 		polyTerrainMesh.GetComponent<MeshFilter>().mesh.uv = terrainUV;
-
-		Texture2D terrainTexture = new Texture2D(polyscale, polyscale, TextureFormat.ARGB32, false);
-
-		Color gr = Color.green;
-		gr = new Color(gr.r, gr.g, gr.b);
-
-		for (int z = 0; z < polyscale; z++)
-		{
-			for (int x = 0; x < polyscale; x++)
-			{
-				terrainTexture.SetPixel(x, z, new Color(gr.r * (.4f * areaMap[x, z].y / heightscale) + gr.r / 4, gr.g * (.4f * areaMap[x, z].y / heightscale) + gr.g / 4, gr.b * (.4f * areaMap[x, z].y / heightscale) + gr.b / 4, 0));
-			}
-		}
-		terrainTexture.Apply();
-
-		terrainmat.mainTexture = terrainTexture;
-
-		polyTerrainMesh.AddComponent<MeshCollider>();
 	}
 }
