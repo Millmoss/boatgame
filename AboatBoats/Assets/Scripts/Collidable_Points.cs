@@ -16,7 +16,7 @@ public class Collidable_Points : MonoBehaviour
         print("HI");
         if(other.transform.tag == player_tag)
         {
-            score_main.AddPoints(point_value);
+            score_main.AddPoints(point_value,"cool joker u r");
             disable_onhit.enabled = false;
         }
     }
