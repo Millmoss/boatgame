@@ -56,8 +56,8 @@ public class TPCamera : MonoBehaviour
 				xLook += 360f;
 			if (yLook >= 90f)
 				yLook = 89f;
-			if (yLook < -45f)
-				yLook = -45f;
+			if (yLook < -1f)
+				yLook = -1f;
 		}
 		if (Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.LeftAlt))
 		{
