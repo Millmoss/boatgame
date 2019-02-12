@@ -60,7 +60,7 @@ public class Print_Text : MonoBehaviour
             textbox.text = textbox.text.Substring(1, textbox.text.Length-1);
         }
 
-        yield return new WaitForSeconds(0.6525f);
+        yield return new WaitForSeconds(0.1225f);
 
 
         if (textbox.text.Length > 0)
@@ -78,7 +78,7 @@ public class Print_Text : MonoBehaviour
     {
         StopAllCoroutines();
         unwrite_l2r = isL2R;
-        //StartCoroutine(unwriteText());
+        StartCoroutine(unwriteText());
     }
 
     public void SetText(string txt)

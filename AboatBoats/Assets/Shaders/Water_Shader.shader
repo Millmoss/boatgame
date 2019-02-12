@@ -197,6 +197,8 @@
 					clamp((max(0, dot(input.normal, _WorldSpaceLightPos0.xyz))) * _LightColor0 / 2 + 0.45,
 						0,
 						1);
+
+				//wait im using_LightColor0 a lot; redundent?
 				
 				// apply the DepthFactor to be able to tune at what depth values
 				// the foam line actually starts

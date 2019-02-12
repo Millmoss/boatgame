@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_Image
-  m_Shader: {fileID: 4800000, guid: 62d1cefaa890feb46a69d6001dc7cdcb, type: 3}
+  m_Name: UI_Animated
+  m_Shader: {fileID: 4800000, guid: 757d355eda80c1343b07ddb0103311af, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,6 +64,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Height: 200
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -76,9 +77,11 @@ Material:
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
+    - _Time_Mod: 19.397123
     - _UVSec: 0
     - _UseUIAlphaClip: 0
+    - _Width: 123
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.33962262, g: 0.16820931, b: 0.16820931, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

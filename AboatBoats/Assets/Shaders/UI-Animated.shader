@@ -1,9 +1,10 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "Custom/UIDefault"
+Shader "Custom/UI-Animated"
 {
     Properties
     {
+		_Time_Mod ("Time Mod", Float) = 0
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
 
@@ -81,6 +82,7 @@ Shader "Custom/UIDefault"
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
             float4 _MainTex_ST;
+			float _Time_Mod;
 
             v2f vert(appdata_t v)
             {
@@ -91,6 +93,15 @@ Shader "Custom/UIDefault"
                 OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
 
                 OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+
+				//We make sure that the given time % 3.14 == 0.
+				int tmp = _Time_Mod / 3.14;
+				float mult = tmp * 3.14;
+
+				if((_Time[1] * 6 - OUT.vertex.x) < (mult + 3.14 / 2 + 3.14 * 2) &&
+					(_Time[1] * 6 - OUT.vertex.x) > (mult + 3.14/2))
+					OUT.vertex.y -= sin(mult + (3.14 / 2) + _Time[1] * 6 - OUT.vertex.x) / 5;
+
 
                 OUT.color = v.color * _Color;
                 return OUT;
