@@ -1,0 +1,6 @@
+pos = boat.position + (.25, -0.4, 0)
+
+corner_a = pos + (0.75, 0, 1.3)
+corner_b = pos + (-0.75, 0, 1.3)
+corner_c = pos + (0.75, 0, -1.3)
+corner_d = pos + (-0.75, 0, -1.3)
