@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class Fish_circle : MonoBehaviour
 {
-    public GameObject obj;
+    public GameObject obj, parent;
     public float fish_num = 4;
     public float radius = 0.5f;
     List<GameObject> fishes = new List<GameObject>();
@@ -26,7 +26,7 @@ public class Fish_circle : MonoBehaviour
             float y = gameObject.transform.position.y + r * Mathf.Sin(theta);
             GameObject o =
                 Instantiate(obj, new Vector3(x, y, transform.position.z)
-                ,Quaternion.identity,transform.parent);
+                ,Quaternion.identity,parent.transform);
             fishes.Add(o);
         }
         for (int i = 0;i < fishes.Count - 1;i++)
@@ -34,6 +34,7 @@ public class Fish_circle : MonoBehaviour
             fishes[i].transform.LookAt(fishes[i + 1].transform);
         }
         fishes[fishes.Count - 1].transform.LookAt(fishes[0].transform);
+        parent.transform.rotation = transform.rotation;
     }
 
     private void OnDisable()
@@ -52,7 +53,7 @@ public class Fish_circle : MonoBehaviour
         foreach(GameObject fish in fishes)
         {
             fish.transform.RotateAround(transform.position, 
-                Vector3.forward, 
+                parent.transform.forward, 
                 20 * Time.deltaTime);
         }
     }

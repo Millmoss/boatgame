@@ -22,12 +22,12 @@ public class UI_Main : MonoBehaviour
         waiting_score_t = true;
     }
 
-    public void AddPoints(int points)
+    public void AddPoints(int points, string text)
     {
         cur_points.reset_score();
         total_points.AddPoints(0);
         cur_points.AddPoints(points);
-        points_text.SetText("Looking Cool");
+        points_text.SetText(text);
         waiting_s_duration = 0;
         waiting_c_duration = 0;
         waiting_score_c = true;
@@ -39,7 +39,7 @@ public class UI_Main : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            AddPoints(100);
+            AddPoints(100,"LOOKING COOL JOKER");
         }
         //Handle waiting for the text.
         if(waiting_comment)
