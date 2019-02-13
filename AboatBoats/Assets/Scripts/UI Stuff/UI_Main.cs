@@ -24,7 +24,6 @@ public class UI_Main : MonoBehaviour
 
     public void AddPoints(int points, string text)
     {
-        cur_points.reset_score();
         total_points.AddPoints(0);
         cur_points.AddPoints(points);
         points_text.SetText(text);
@@ -72,7 +71,7 @@ public class UI_Main : MonoBehaviour
         }
         else if (adding_scores && !cur_points.IsOnScreen())
         {
-            total_points.AddPoints(100);
+            total_points.AddPoints(cur_points.wanted_score);
             txbx.Animate();
             adding_scores = false;
         }
@@ -87,7 +86,8 @@ public class UI_Main : MonoBehaviour
                 {
                     total_points.DisableScore();
                     waiting_score_t = false;
-                }
+					cur_points.reset_score();
+				}
             }
         }
     }

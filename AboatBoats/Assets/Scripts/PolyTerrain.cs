@@ -40,8 +40,6 @@ public class PolyTerrain : MonoBehaviour
 		polyTerrainMesh.AddComponent<MeshRenderer>();
 		polyTerrainMesh.GetComponent<MeshRenderer>().material = terrainmat;
 		polyTerrain();
-		AssetDatabase.CreateAsset(polyTerrainMesh.GetComponent<MeshFilter>().mesh, "Assets/PlaneMesh");
-		AssetDatabase.SaveAssets();
 	}
 
 	void Update()

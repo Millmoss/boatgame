@@ -14,7 +14,7 @@ public class Scoring_Two_Parts : MonoBehaviour
     private Vector3 init_pos;
     private float leaving_duration = 0f;
 
-    private int current_score = 0, wanted_score = 0;
+    public int current_score = 0, wanted_score = 0;
 
     private void Start()
     {
