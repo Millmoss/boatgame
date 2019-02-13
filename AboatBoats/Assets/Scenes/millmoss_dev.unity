@@ -20481,6 +20481,11 @@ PrefabInstance:
       propertyPath: sc
       value: 
       objectReference: {fileID: 1527746058}
+    - target: {fileID: 107856189234820565, guid: 312fe9e3c35e6014eb0faeaf7dc9fa8d,
+        type: 3}
+      propertyPath: ding
+      value: 
+      objectReference: {fileID: 1527746061}
     - target: {fileID: 3038874782977582985, guid: 312fe9e3c35e6014eb0faeaf7dc9fa8d,
         type: 3}
       propertyPath: m_Enabled

@@ -10,6 +10,7 @@ public class Collidable_Points : MonoBehaviour
     public int point_value;
     public UI_Main score_main;
     public MonoBehaviour disable_onhit;
+	public AudioSource ding;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +18,7 @@ public class Collidable_Points : MonoBehaviour
         {
             score_main.AddPoints(point_value,"cool joker u r");
             disable_onhit.enabled = false;
+			other.gameObject.GetComponentInParent<Boat>().playDing();
         }
     }
 }

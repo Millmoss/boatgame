@@ -28,6 +28,7 @@ public class Boat : MonoBehaviour
 	public AudioSource sa;
 	public AudioSource sb;
 	public AudioSource sc;
+	public AudioSource ding;
 	private bool underwater;
 
     void Start()
@@ -195,6 +196,11 @@ public class Boat : MonoBehaviour
 
 		Vector3 clampVec = Vector3.ClampMagnitude(new Vector3(boatBody.velocity.x, 0, boatBody.velocity.z), speedLimit);
 		//boatBody.velocity = new Vector3(clampVec.x, boatBody.velocity.y, clampVec.z);
+	}
+
+	public void playDing()
+	{
+		ding.Play();
 	}
 
 	void OnCollisionEnter(Collision c)
