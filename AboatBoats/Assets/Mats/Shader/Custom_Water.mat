@@ -35,11 +35,11 @@ Material:
     - _DepthFactor: 1
     - _DistortStrength: 1
     - _ExtraHeight: 0.2
-    - _Transparency: 1
-    - _WaveAmp: 10
+    - _Transparency: 0.95
+    - _WaveAmp: 0.1
     - _WaveSpeed: 10
     m_Colors:
-    - _BoatPos: {r: 9.9, g: -1.04, b: 2.6999998, a: 0}
+    - _BoatPos: {r: 9.967124, g: -158.03152, b: 421.75656, a: 0}
     - _BoatX: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0.9000001, b: 1, a: 1}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}
