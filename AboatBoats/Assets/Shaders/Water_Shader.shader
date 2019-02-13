@@ -169,28 +169,13 @@
 				float3 normal = normalize(cross(p1_norm - p0_norm, p2_norm - p0_norm));
 
 				g2f o[3];
-
-				float4 bounds = _BoatPos / 5.5;
-				float4 corner_one = bounds + (.5 * 2,0,.5 * 3);
-				float4 corner_two = bounds + (-.5 * 2, 0, -.5 * 3);
-
 				[unroll]
 				for (int i = 0; i < 3; i++) {
 					o[i].normal = normal;
 					// convert obj-space position to camera clip space
 					o[i].pos = UnityObjectToClipPos(input[i].pos);
 					o[i].screenPos = input[i].screenPos;
-					if (input[i].pos.x > corner_two.x &&
-						input[i].pos.z > corner_two.z)
-					{
-						if (input[i].pos.x < corner_one.x &&
-							input[i].pos.z < corner_one.z)
-						{
-							Vector tmp = input[i].pos;
-							tmp.y = bounds.y - 0.4;
-							o[i].pos = UnityObjectToClipPos(tmp);
-						}
-					}
+		
 					
 					tristream.Append(o[i]);
 				}
