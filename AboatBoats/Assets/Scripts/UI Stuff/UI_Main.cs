@@ -37,7 +37,7 @@ public class UI_Main : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.L	))
         {
             AddPoints(100,"LOOKING COOL JOKER");
         }
