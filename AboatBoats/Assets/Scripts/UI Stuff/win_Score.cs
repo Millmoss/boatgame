@@ -10,6 +10,8 @@ public class win_Score : MonoBehaviour
     private void Start()
     {
         txt.text = "winr is you\nSCORE IS " +UI_Main.total_score;
-    }
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None;
+	}
 
 }
