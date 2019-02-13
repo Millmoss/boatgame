@@ -1,53 +1,10 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8911199598962270115
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8379301955652703933}
-  - component: {fileID: 1795261157100784379}
-  - component: {fileID: 211206682772453893}
-  - component: {fileID: 3175517130616645674}
-  - component: {fileID: 348485126684673261}
-  m_Layer: 0
-  m_Name: rampC
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8379301955652703933
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911199598962270115}
-  m_LocalRotation: {x: 0.3163126, y: -0.56697786, z: -0.69087887, w: 0.3180705}
-  m_LocalPosition: {x: 129.6, y: -81.6, z: 75.5}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -35.606003, y: -78.869, z: -100.97101}
---- !u!33 &1795261157100784379
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911199598962270115}
-  m_Mesh: {fileID: 4300000, guid: 97449f5202290b24aafa8f9f63182e88, type: 3}
 --- !u!23 &211206682772453893
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 8911199598962270115}
   m_Enabled: 1
   m_CastShadows: 1
@@ -57,7 +14,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 1
-  m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f90b28b6c14a0ac4f97cec96bb4f6fc9, type: 2}
   m_StaticBatchInfo:
@@ -79,13 +35,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &348485126684673261
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 8911199598962270115}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 97449f5202290b24aafa8f9f63182e88, type: 3}
+--- !u!33 &1795261157100784379
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 8911199598962270115}
+  m_Mesh: {fileID: 4300000, guid: 97449f5202290b24aafa8f9f63182e88, type: 3}
 --- !u!95 &3175517130616645674
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 8911199598962270115}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 97449f5202290b24aafa8f9f63182e88, type: 3}
@@ -98,17 +74,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &348485126684673261
-MeshCollider:
+--- !u!4 &8379301955652703933
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 8911199598962270115}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 97449f5202290b24aafa8f9f63182e88, type: 3}
+  m_LocalRotation: {x: 0.3163126, y: -0.56697786, z: -0.69087887, w: 0.3180705}
+  m_LocalPosition: {x: 129.6, y: -81.6, z: 75.5}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -35.606003, y: -78.869, z: -100.97101}
+--- !u!1 &8911199598962270115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8379301955652703933}
+  - component: {fileID: 1795261157100784379}
+  - component: {fileID: 211206682772453893}
+  - component: {fileID: 3175517130616645674}
+  - component: {fileID: 348485126684673261}
+  m_Layer: 0
+  m_Name: RampC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1

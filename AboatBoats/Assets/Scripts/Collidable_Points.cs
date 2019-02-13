@@ -13,7 +13,6 @@ public class Collidable_Points : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("HI");
         if(other.transform.tag == player_tag)
         {
             score_main.AddPoints(point_value,"cool joker u r");

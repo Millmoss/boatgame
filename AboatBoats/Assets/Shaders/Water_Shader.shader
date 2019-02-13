@@ -7,21 +7,18 @@
 	{
 		// color of the water
 		_Color("Color", Color) = (1, 1, 1, 1)
-		// color of the edge effect
-		_EdgeColor("Edge Color", Color) = (1, 1, 1, 1)
-		// width of the edge effect
-		_DepthFactor("Depth Factor", float) = 1.0
-
-		_DepthRampTex("Depth Ramp", 2D) = "white" {}
 
 		_WaveSpeed("Wave Speed", float) = 1.0
 		_ExtraHeight("Wave Height", float) = 0.25
 		_WaveAmp("Wave Amp", float) = 1.0
 		_NoiseTex("Noise Texture", 2D) = "white"{}
+		_BoatPos("Boat Pos", Vector) = (1,1,1,1)
+		_Transparency("Transparent Value",float) = 1.0
 	}
 	SubShader
 	{
-		//Initial pass; generate the water.
+        Tags {"Queue"="Transparent" "RenderType"="Transparent" }
+		Blend SrcAlpha OneMinusSrcAlpha
 		Pass
 		{
 			CGPROGRAM
@@ -35,17 +32,15 @@
 			// Unity built-in - NOT required in Properties
 			sampler2D _CameraDepthTexture;
 
-			sampler2D _DepthRampTex;
 
-			float4 _MinColor;
 			float4 _Color;
-			float4 _EdgeColor;
-			float _DepthFactor;
 			float _WaveSpeed;
 			float _WaveAmp;
 			float _ExtraHeight;
+			float _Transparency;
 			sampler2D _NoiseTex;
 			uniform float4 _LightColor0;
+			uniform float4 _BoatPos;
 
 			struct vertexInput
 			{
@@ -175,12 +170,28 @@
 
 				g2f o[3];
 
+				float4 bounds = _BoatPos / 5.5;
+				float4 corner_one = bounds + (.5 * 2,0,.5 * 3);
+				float4 corner_two = bounds + (-.5 * 2, 0, -.5 * 3);
+
 				[unroll]
 				for (int i = 0; i < 3; i++) {
 					o[i].normal = normal;
 					// convert obj-space position to camera clip space
 					o[i].pos = UnityObjectToClipPos(input[i].pos);
 					o[i].screenPos = input[i].screenPos;
+					if (input[i].pos.x > corner_two.x &&
+						input[i].pos.z > corner_two.z)
+					{
+						if (input[i].pos.x < corner_one.x &&
+							input[i].pos.z < corner_one.z)
+						{
+							Vector tmp = input[i].pos;
+							tmp.y = bounds.y - 0.4;
+							o[i].pos = UnityObjectToClipPos(tmp);
+						}
+					}
+					
 					tristream.Append(o[i]);
 				}
 
@@ -198,15 +209,6 @@
 						0,
 						1);
 
-				//wait im using_LightColor0 a lot; redundent?
-				
-				// apply the DepthFactor to be able to tune at what depth values
-				// the foam line actually starts
-				//NOTE: saturate = clamp(0,1).
-				float foamLine = 1 - saturate(_DepthFactor * (depth - input.screenPos.w));
-
-				// sample the ramp texture
-				float4 foamRamp = float4(tex2D(_DepthRampTex, float2(foamLine, 0.5)).rgb, 1.0);
 
 				//Lerp between minimum and max color based on the lighting.
 				// multiply the edge color by the foam factor to get the edge,
@@ -221,8 +223,9 @@
 				col.y /= 2;
 				col.z /= 2;
 
+				col.a = _Transparency;
 
-				return col * foamRamp;
+				return col;
 				
 			}
 
