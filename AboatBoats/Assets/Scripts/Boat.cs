@@ -25,6 +25,10 @@ public class Boat : MonoBehaviour
 	private bool onRamp;
 	private bool onGround;
 	private float seaHeight;
+	public AudioSource sa;
+	public AudioSource sb;
+	public AudioSource sc;
+	private bool underwater;
 
     void Start()
     {
@@ -39,6 +43,7 @@ public class Boat : MonoBehaviour
 		positionChange = transform.position;
 		onRamp = false;
 		onGround = false;
+		underwater = false;
     }
 	
     void Update()
@@ -49,6 +54,29 @@ public class Boat : MonoBehaviour
 		control();
 		water();
 		gravity();
+
+		if (boatBody.velocity.y < -5 && !underwater && transform.position.y <= seaHeight)
+		{
+			underwater = true;
+			float r = Random.value * 3;
+			if (r < 1)
+			{
+				sa.Play();
+			}
+			else if (r < 2)
+			{
+				sb.Play();
+			}
+			else
+			{
+				sc.Play();
+			}
+		}
+		else if (transform.position.y > seaHeight)
+		{
+			underwater = false;
+		}
+
 
 		//boatBody.velocity += speed * Time.deltaTime;
 		//boatBody.velocity = Vector3.ClampMagnitude(boatBody.velocity, speedLimit);
