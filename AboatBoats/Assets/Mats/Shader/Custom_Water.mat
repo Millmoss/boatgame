@@ -39,7 +39,7 @@ Material:
     - _WaveAmp: 0.1
     - _WaveSpeed: 10
     m_Colors:
-    - _BoatPos: {r: -26.400034, g: -7.961063, b: -165.72044, a: 0}
+    - _BoatPos: {r: 176.21246, g: -11.608559, b: 856.9657, a: 0}
     - _BoatX: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0.9000001, b: 1, a: 1}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}

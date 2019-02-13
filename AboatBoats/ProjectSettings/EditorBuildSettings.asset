@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/millmoss_dev.unity
     guid: 9ee10a466c2ee984398a8b84a148ab37
+  - enabled: 1
+    path: Assets/Scenes/win.unity
+    guid: 18576221f3b8bd142a44a3781d5f028b
   m_configObjects: {}

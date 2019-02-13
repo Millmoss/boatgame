@@ -16,7 +16,22 @@ public class Collidable_Points : MonoBehaviour
     {
         if(other.transform.tag == player_tag)
         {
-            score_main.AddPoints(point_value,"cool joker u r");
+            string txt = "";
+            int rand = Random.Range(0, 3);
+            switch (rand)
+            {
+                case 0:
+                    txt = "Woah!";
+                    break;
+                case 1:
+                    txt = "Cool!";
+                    break;
+                case 2:
+                    txt = "Tubular!";
+                    break;
+            }
+
+            score_main.AddPoints(point_value,txt);
             disable_onhit.enabled = false;
 			other.gameObject.GetComponentInParent<Boat>().playDing();
         }

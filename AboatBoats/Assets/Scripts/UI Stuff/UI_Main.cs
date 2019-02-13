@@ -12,6 +12,8 @@ public class UI_Main : MonoBehaviour
     private bool waiting_score_c = false, waiting_score_t = false, waiting_comment = false, adding_scores = false;
     private float waiting_s_duration = 0f, waiting_c_duration = 0f,points_to_add = 0;
 
+    public static int total_score = 0;
+
     private void Start()
     {
         txbx.fin_anim_func = setWaitingScoreT;
@@ -24,6 +26,7 @@ public class UI_Main : MonoBehaviour
 
     public void AddPoints(int points, string text)
     {
+        total_score += points;
         total_points.AddPoints(0);
         cur_points.AddPoints(points);
         points_text.SetText(text);
