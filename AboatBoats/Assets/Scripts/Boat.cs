@@ -30,6 +30,7 @@ public class Boat : MonoBehaviour
 	public AudioSource sc;
 	public AudioSource ding;
 	private bool underwater;
+	public UI_Main pointsman;
 
     void Start()
     {
@@ -82,6 +83,11 @@ public class Boat : MonoBehaviour
 		//boatBody.velocity += speed * Time.deltaTime;
 		//boatBody.velocity = Vector3.ClampMagnitude(boatBody.velocity, speedLimit);
 		//velocity += waterPlusGravity;
+
+		if (Input.GetKey(KeyCode.R))
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
 	}
 
 	void FixedUpdate()
@@ -220,6 +226,10 @@ public class Boat : MonoBehaviour
 		if (c.gameObject.tag == "Ramp")
 		{
 			onRamp = false;
+			if (boatBody.velocity.magnitude > 10)
+			{
+				pointsman.AddPoints(100, "RAMPICAL");
+			}
 		}
 		if (c.gameObject.tag == "Ground")
 		{
